@@ -2,7 +2,7 @@ NAME = megaphone
 DEFFLAGS = -Wall -Wextra -Werror
 CPPFLAGS = -std=c++98
 CC = c++
-SRCS = main.cpp
+SRCS = megaphone.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all:	$(NAME)
