@@ -5,11 +5,11 @@
 int main()
 {
 	std::cout << "Phonebook program launched!" << std::endl;
-	std::cout << "You are allowed to three commands - ADD, SEARCH, EXIT!" << std::endl;
 	int count = 0;
 	PhoneBook phonebook;
 	while (1)
 	{
+		std::cout << "Enter one of three commands - ADD, SEARCH, EXIT" << std::endl;
 		std::string cmd;
 		std::cin >> cmd;
 		if (cmd == "ADD")
