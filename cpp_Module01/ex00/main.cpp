@@ -9,4 +9,5 @@ int main()
 	Zombie *newzombie = newZombie("newzombie zombie");
 	newzombie->announce();
 	delete newzombie;
+	return (0);
 }
