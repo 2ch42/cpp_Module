@@ -47,6 +47,7 @@ void	man_text(int argc, char *argv[], std::string& s)
 	}
 }
 
+
 int main(int argc, char *argv[])
 {
 	if (arg_err(argc, argv))
