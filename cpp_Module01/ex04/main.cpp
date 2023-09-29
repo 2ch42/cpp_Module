@@ -2,30 +2,21 @@
 #include <fstream>
 #include <string>
 
-int arg_err(int argc, char *argv[])
-{
-	if (argc != 4)
-		return (1);
-	return (0);
-}
-
 int	get_text(int argc, char *argv[], std::string& s)
 {
 	std::ifstream in(argv[1]);
+	std::string	tmp;
 	if (in.is_open())
 	{
-		in.seekg(0, std::ios::end);
-		int size = in.tellg();
-		s.resize(size);
-		in.seekg(0, std::ios::beg);
-		in.read(&s[0], size);
+		while (std::getline(in, tmp))
+			s += tmp + "\n";
 	}
 	else
 	{
 		std::cout << "File open error!" << std::endl;
-		return (1);
+		return (0);
 	}
-	return (0);
+	return (1);
 }
 
 void	w_file(std::string& s, std::string new_file)
@@ -35,6 +26,13 @@ void	w_file(std::string& s, std::string new_file)
 		out << s;
 	else
 		std::cout << "New file open error!" << std::endl;
+}
+
+int arg_err(int argc, char *argv[])
+{
+	if (argc != 4)
+		return (1);
+	return (0);
 }
 
 void	man_text(int argc, char *argv[], std::string& s)
@@ -62,7 +60,7 @@ int main(int argc, char *argv[])
 
 	std::string s;
 
-	if (get_text(argc, argv, s))
+	if (!(get_text(argc, argv, s)))
 		return (0);
 	man_text(argc, argv, s);
 	w_file(s, new_file);
