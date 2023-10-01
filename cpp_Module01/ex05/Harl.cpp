@@ -22,3 +22,18 @@ void	Harl::error(void)
 {
 	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
 }
+
+void	Harl::complain(std::string level)
+{
+	void	(Harl::*func[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+	std::string str_arr[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+
+	for (int i = 0; i < 4; i++)
+	{
+		if (level == str_arr[i])
+		{
+			(this->*func[i])();
+			return ;
+		}
+	}
+}
