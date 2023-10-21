@@ -5,12 +5,8 @@
 int	get_text(int argc, char *argv[], std::string& s)
 {
 	std::ifstream in(argv[1]);
-	std::string	tmp;
 	if (in.is_open())
-	{
-		while (std::getline(in, tmp))
-			s += tmp + "\n";
-	}
+		std::getline(in, s, '\0');
 	else
 	{
 		std::cout << "File open error!" << std::endl;
@@ -42,6 +38,7 @@ void	man_text(int argc, char *argv[], std::string& s)
 	int idx = s.find(pre_str);
 	while (idx >= 0)
 	{
+		std::cout << "hi";//
 		s.replace(idx, pre_str.size(), post_str);
 		idx = s.find(pre_str);
 	}
