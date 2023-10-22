@@ -1,8 +1,8 @@
-NAME = megaphone
+NAME = test
 DEFFLAGS = -Wall -Wextra -Werror
 CPPFLAGS = -std=c++98
 CC = c++
-SRCS = main.cpp
+SRCS = Account.cpp test.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all:	$(NAME)
