@@ -53,26 +53,42 @@ void	PhoneBook::add(int idx)
 	std::cout <<"You need to fill first name, last name, nickname, phone number, and darkest secret!" << std::endl;
 	std::cout << "No empty field allowed!" << std:: endl;
 	std::cout << "Thus, fill phone number without \'-\' " << std::endl;
-	std::cin >> contacts[idx].first_name;
-	while (!str_alpha(contacts[idx].first_name))
+
+	std::string first_name;
+	std::cin >> first_name;
+	while (!str_alpha(first_name))
 	{
 		std::cout << "First name should contain only alphabet." << std::endl;
-		std::cin >> contacts[idx].first_name;
+		std::cin >> first_name;
 	}
-	std::cin >> contacts[idx].last_name;
-	while (!str_alpha(contacts[idx].last_name))
+	contacts[idx].set_first_name(first_name);
+
+	std::string last_name;
+	std::cin >> last_name;
+	while (!str_alpha(last_name))
 	{
 		std::cout << "Last name should contain only alphabet." << std::endl;
-		std::cin >> contacts[idx].last_name;
+		std::cin >> last_name;
 	}
-	std::cin >> contacts[idx].nickname;
-	std::cin >> contacts[idx].phone_number;
-	while (!str_digit(contacts[idx].phone_number))
+	contacts[idx].set_last_name(last_name);
+
+	std::string nickname;
+	std::cin >> nickname;
+	contacts[idx].set_nickname(nickname);
+
+	std::string phone_number;
+	std::cin >> phone_number;
+	while (!str_digit(phone_number))
 	{
-		std::cout << "Phone nubmer should contain only digit." << std::endl;
-		std::cin >> contacts[idx].phone_number;
+		std::cout << "Phone number should contain only digit." << std::endl;
+		std::cin >> phone_number;
 	}
-	std::cin >> contacts[idx].darkest_secret;
+	contacts[idx].set_phone_number(phone_number);
+
+	std::string darkest_secret;
+	std::cin >> darkest_secret;
+	contacts[idx].set_darkest_secret(darkest_secret);
+	
 	std::cout << "New contact added successfully!" << std::endl;
 }
 
@@ -84,9 +100,9 @@ void	PhoneBook::search(void)
 		std::cout << std::setw(10);
 		std::cout << i + 1;
 		std::cout << "|";
-		std::cout << get_new_str(contacts[i].first_name) << "|";
-		std::cout << get_new_str(contacts[i].last_name) << "|";
-		std::cout << get_new_str(contacts[i].nickname) << "|" << std::endl;
+		std::cout << get_new_str(contacts[i].get_first_name()) << "|";
+		std::cout << get_new_str(contacts[i].get_last_name()) << "|";
+		std::cout << get_new_str(contacts[i].get_nickname()) << "|" << std::endl;
 	}
 	std::cout << "Choose one index to see more details." << std::endl;
 	std::string idx;
@@ -98,10 +114,10 @@ void	PhoneBook::search(void)
 		std::cin >> idx;
 	}
 	std::cout << "****************************************" << std::endl;
-	std::cout << "FIRST NAME : " << contacts[idx.front() - 49].first_name << std::endl;
-	std::cout << "LAST NAME : " << contacts[idx.front() - 49].last_name << std::endl;
-	std::cout << "NICKNAME : " << contacts[idx.front() - 49].nickname << std::endl;
-	std::cout << "PHONE NUMBER : " << contacts[idx.front() - 49].phone_number << std::endl;
-	std::cout << "DARKEST SECRET : " << contacts[idx.front() - 49].darkest_secret << std::endl;
+	std::cout << "FIRST NAME : " << contacts[idx.front() - 49].get_first_name() << std::endl;
+	std::cout << "LAST NAME : " << contacts[idx.front() - 49].get_last_name() << std::endl;
+	std::cout << "NICKNAME : " << contacts[idx.front() - 49].get_nickname() << std::endl;
+	std::cout << "PHONE NUMBER : " << contacts[idx.front() - 49].get_phone_number() << std::endl;
+	std::cout << "DARKEST SECRET : " << contacts[idx.front() - 49].get_darkest_secret() << std::endl;
 	std::cout << "*****************************************" << std::endl;
 }
