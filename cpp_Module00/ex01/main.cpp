@@ -12,6 +12,8 @@ int main()
 		std::cout << "Enter one of three commands - ADD, SEARCH, EXIT" << std::endl;
 		std::string cmd;
 		std::cin >> cmd;
+		if (std::cin.eof())
+			break;
 		if (cmd == "ADD")
 			phonebook.add(count++);
 		else if (cmd == "SEARCH")

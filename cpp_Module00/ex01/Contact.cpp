@@ -1,5 +1,5 @@
 #include <iostream>
-#include "contact.hpp"
+#include "Contact.hpp"
 
 void	Contact::set_first_name(std::string first_name)
 {

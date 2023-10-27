@@ -56,37 +56,53 @@ void	PhoneBook::add(int idx)
 
 	std::string first_name;
 	std::cin >> first_name;
+	if (std::cin.eof())
+		std::exit(1);
 	while (!str_alpha(first_name))
 	{
 		std::cout << "First name should contain only alphabet." << std::endl;
 		std::cin >> first_name;
+		if (std::cin.eof())
+			std::exit(1);
 	}
 	contacts[idx].set_first_name(first_name);
 
 	std::string last_name;
 	std::cin >> last_name;
+	if (std::cin.eof())
+		std::exit(1);
 	while (!str_alpha(last_name))
 	{
 		std::cout << "Last name should contain only alphabet." << std::endl;
 		std::cin >> last_name;
+		if (std::cin.eof())
+			std::exit(1);
 	}
 	contacts[idx].set_last_name(last_name);
 
 	std::string nickname;
 	std::cin >> nickname;
+	if (std::cin.eof())
+		std::exit(1);
 	contacts[idx].set_nickname(nickname);
 
 	std::string phone_number;
 	std::cin >> phone_number;
+	if (std::cin.eof())
+		std::exit(1);
 	while (!str_digit(phone_number))
 	{
 		std::cout << "Phone number should contain only digit." << std::endl;
 		std::cin >> phone_number;
+		if (std::cin.eof())
+			std::exit(1);
 	}
 	contacts[idx].set_phone_number(phone_number);
 
 	std::string darkest_secret;
 	std::cin >> darkest_secret;
+	if (std::cin.eof())
+		std::exit(1);
 	contacts[idx].set_darkest_secret(darkest_secret);
 	
 	std::cout << "New contact added successfully!" << std::endl;
@@ -107,11 +123,15 @@ void	PhoneBook::search(void)
 	std::cout << "Choose one index to see more details." << std::endl;
 	std::string idx;
 	std::cin >> idx;
+	if (std::cin.eof())
+		std::exit(1);
 	while (!(idx == "1" || idx == "2" || idx == "3" || idx == "4" ||
 				idx == "5" || idx =="6" || idx == "7" || idx == "8"))
 	{
 		std::cout << "Choose index between 1 ~ 8" << std::endl;
 		std::cin >> idx;
+		if (std::cin.eof())
+			std::exit(1);
 	}
 	std::cout << "****************************************" << std::endl;
 	std::cout << "FIRST NAME : " << contacts[idx.front() - 49].get_first_name() << std::endl;
