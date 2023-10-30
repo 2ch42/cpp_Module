@@ -38,7 +38,8 @@ void	man_text(int argc, char *argv[], std::string& s)
 	int idx = s.find(pre_str);
 	while (idx >= 0)
 	{
-		s.replace(idx, pre_str.size(), post_str);
+		s.erase(idx, pre_str.size());
+		s.insert(idx, post_str);
 		idx = s.find(pre_str);
 	}
 }
