@@ -1,14 +1,13 @@
 NAME = test
-DEFFLAGS = -Wall -Wextra -Werror
-CPPFLAGS = -std=c++98
-CC = c++
+CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
+CXX = c++
 SRCS = main.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all:	$(NAME)
 
 $(NAME):	$(OBJS)
-	$(CC) $(DEFFLAGS) $(CPPFLAGS) $^ -o $@
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
 $(OBJS):	$(SRCS)
 

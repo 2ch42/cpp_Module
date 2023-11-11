@@ -12,6 +12,7 @@ int	get_text(int argc, char *argv[], std::string& s)
 		std::cout << "File open error!" << std::endl;
 		return (0);
 	}
+	argc++;
 	return (1);
 }
 
@@ -28,6 +29,8 @@ int arg_err(int argc, char *argv[])
 {
 	if (argc != 4)
 		return (1);
+	if (argv[0])
+		argc++;
 	return (0);
 }
 
@@ -48,6 +51,7 @@ void	man_text(int argc, char *argv[], std::string& s)
 			break;
 		idx = len + check;
 	}
+	argc++;
 }
 
 int main(int argc, char *argv[])
