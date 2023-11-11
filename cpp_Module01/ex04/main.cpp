@@ -36,11 +36,17 @@ void	man_text(int argc, char *argv[], std::string& s)
 	std::string pre_str(argv[2]);
 	std::string post_str(argv[3]);
 	int idx = s.find(pre_str);
+	int	len;
+	int	check;
 	while (idx >= 0)
 	{
 		s.erase(idx, pre_str.size());
 		s.insert(idx, post_str);
-		idx = s.find(pre_str);
+		len = (s.substr(0, idx + post_str.size())).size();
+		check = (s.substr(idx + post_str.size(), s.size() - len)).find(pre_str);
+		if (check < 0)
+			break;
+		idx = len + check;
 	}
 }
 
