@@ -9,17 +9,17 @@ Fixed::Fixed() : fp_value(0)
 
 Fixed::Fixed(const int raw)
 {
-	this->fp_value = (raw << this->frac_bits);
+	this->fp_value = raw << this->frac_bits;
 	std::cout << "Int constructor called" << std::endl;
 }
 
 Fixed::Fixed(const float raw)
 {
-	this->fp_value = roundf(raw * (1 << this->frac_bits));
+	this->fp_value = std::roundf(raw * (1 << frac_bits));
 	std::cout << "Float constructor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed &fixed)
+Fixed::Fixed(const Fixed& fixed)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	this->fp_value = fixed.getRawBits();
@@ -28,7 +28,8 @@ Fixed::Fixed(const Fixed &fixed)
 Fixed&	Fixed::operator=(const Fixed& fixed)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->fp_value = fixed.getRawBits();
+	if (this != &fixed)
+		this->fp_value = fixed.getRawBits();
 	return (*this);
 }
 
@@ -51,7 +52,7 @@ void	Fixed::setRawBits(int const raw)
 
 float	Fixed::toFloat(void) const
 {
-	return ((float)(this->fp_value) / (1 << this->frac_bits));
+	return ((float)fp_value / (1 << this->frac_bits));
 }
 
 int	Fixed::toInt(void) const
@@ -59,7 +60,7 @@ int	Fixed::toInt(void) const
 	return (this->fp_value >> this->frac_bits);
 }
 
-std::ostream&	operator<<(std::ostream& out, const Fixed& fixed)
+std::ostream& operator<<(std::ostream& out, const Fixed& fixed)
 {
 	out << fixed.toFloat();
 	return (out);

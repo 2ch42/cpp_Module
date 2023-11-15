@@ -10,17 +10,17 @@ class Fixed
 		static const int	frac_bits = 8;
 	public:
 		Fixed();
-		Fixed(const int raw);
-		Fixed(const float raw);
+		Fixed(const int raw); //added
+		Fixed(const float raw); //added
 		Fixed(const Fixed& fixed);
 		Fixed& operator=(const Fixed& fixed);
 		~Fixed();
 		int	getRawBits(void) const;
 		void	setRawBits(int const raw);
-		float	toFloat(void) const;
-		int	toInt(void) const;
+		float	toFloat(void) const; //added
+		int	toInt(void) const; //added
 };
 
-std::ostream& operator<<(std::ostream& out, const Fixed &fixed);
+std::ostream& operator<<(std::ostream& out, const Fixed& fixed);
 
 #endif
