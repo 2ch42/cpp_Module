@@ -1,13 +1,12 @@
 #include <iostream>
 #include "Fixed.hpp"
 
-Fixed::Fixed()
+Fixed::Fixed() : fp_value(0)
 {
-	this->fp_value = 0;
 	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed &fixed)
+Fixed::Fixed(const Fixed& fixed)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	this->fp_value = fixed.getRawBits();
