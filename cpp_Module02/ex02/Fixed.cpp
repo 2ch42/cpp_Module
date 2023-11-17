@@ -52,7 +52,7 @@ void	Fixed::setRawBits(int const raw)
 
 float	Fixed::toFloat(void) const
 {
-	return ((float)fp_value / (1 << this->frac_bits));
+	return ((float)this->fp_value / (1 << this->frac_bits));
 }
 
 int	Fixed::toInt(void) const
@@ -122,15 +122,13 @@ Fixed Fixed::operator-(const Fixed& fixed)
 
 Fixed Fixed::operator*(const Fixed& fixed)
 {
-	Fixed	temp;
-	temp.setRawBits((this->fp_value * fixed.fp_value) >> this->frac_bits);
+	Fixed	temp(this->toFloat() * fixed.toFloat());
 	return (temp);
 }
 
 Fixed Fixed::operator/(const Fixed& fixed)
 {
-	Fixed temp;
-	temp.setRawBits(this->fp_value / fixed.fp_value);
+	Fixed temp(this->toFloat() / fixed.toFloat());
 	return (temp);
 }
 
