@@ -101,7 +101,7 @@ bool Fixed::operator!=(const Fixed& fixed)
 {
 	int	pre_value = this->getRawBits();
 	int	post_value = fixed.getRawBits();
-	return (pre_value == post_value);
+	return (pre_value != post_value);
 }
 
 // arithmetic operators
