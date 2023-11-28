@@ -1,31 +1,33 @@
 #include <iostream>
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 ///*
 int main() // test1
 {
+    std::cout << "-----FRAGTRAP DECLARE-----" << std::endl;
+    FragTrap a("No.1-1");
+    FragTrap b("No.1-2");
     std::cout << "-----SCAVTRAP DECLARE-----" << std::endl;
-    ScavTrap a("No.1-1");
-    ScavTrap b("No.1-2");
+    ScavTrap c("No.1-3");
     std::cout << "-----CLAPTRAP DECLARE-----" << std::endl;
-    ClapTrap c("NO.1-3");
+    ClapTrap d("No.1-4");
     std::cout << "\n";
 
-    std::cout << "-----SCAVTRAP USAGE-----" << std::endl;
-    a.guardGate();
-    b.guardGate();
+    std::cout << "-----FRAGTRAP USAGE-----" << std::endl;
+    a.highFiveGuys();
+    b.highFiveGuys();
     a.attack("test1");
     b.attack("test1");
-    std::cout << "-----CLAPTRAP USAGE-----" << std::endl;
     c.attack("test1");
+    d.attack("test1");
 }
 //*/
 
 /*
 int main() // test2
 {
-    ScavTrap a("No.2-1");
-    ScavTrap b("No.2-2");
+    FragTrap a("No.2-1");
+    FragTrap b("No.2-2");
 
     for (int i = 0; i < 6; i++)
     {
@@ -33,7 +35,7 @@ int main() // test2
         a.takeDamage(20);
     }
 
-    for (int i = 0; i < 51; i++)
+    for (int i = 0; i < 101; i++)
     {
         std::cout << i + 1 << " : ";
         b.beRepaired(10);
