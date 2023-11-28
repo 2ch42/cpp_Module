@@ -1,7 +1,7 @@
 #include <iostream>
 #include "ClapTrap.hpp"
 
-
+///*
 int main() // test1
 {
     ClapTrap test("NO.1");
@@ -12,7 +12,7 @@ int main() // test1
     }
     return (0);
 }
-
+//*/
 
 /*
 int main() // test2
