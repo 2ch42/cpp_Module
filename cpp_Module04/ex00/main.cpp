@@ -25,5 +25,10 @@ int main()
     test1->makeSound();
     test2->makeSound();
 
+    delete meta;
+    delete j;
+    delete i;
+    delete test1;
+    delete test2;
     return 0;
 }
