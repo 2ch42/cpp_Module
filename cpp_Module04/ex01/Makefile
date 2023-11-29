@@ -1,7 +1,7 @@
 NAME = test
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 CXX = c++
-SRCS = Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp main.cpp
+SRCS = Animal.cpp Brain.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp main.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all:	$(NAME)
