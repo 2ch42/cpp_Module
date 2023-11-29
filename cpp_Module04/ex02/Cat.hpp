@@ -13,7 +13,7 @@ class Cat : public Animal
         Cat(const Cat& cat);
         Cat& operator=(const Cat& cat);
         ~Cat();
-        void    makeSound() const;
+        void    makeSound() const; // override function
 };
 
 #endif
