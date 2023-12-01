@@ -1,7 +1,8 @@
 NAME = test
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 CXX = c++
-SRCS = AMateria.cpp Ice.cpp Cure.cpp ICharacter.cpp Character.cpp IMateriaSource.cpp MateriaSource.cpp main.cpp
+SRCS = Character.cpp MateriaSource.cpp Ice.cpp Cure.cpp AMateria.cpp main.cpp
+#SRCS = *.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all:	$(NAME)

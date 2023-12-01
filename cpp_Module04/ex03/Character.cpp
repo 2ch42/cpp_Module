@@ -47,8 +47,11 @@ Character& Character::operator=(const Character& character)
 
 Character::~Character()
 {
-    if (this->slots)
-        delete[] (this->slots);
+    for(int i = 0; i < 4; i++)
+    {
+        if (this->slots[i])
+            delete (this->slots[i]);
+    }
     if (this->trash)
         delete (this->trash);
     std::cout << "Character destructor called" << std::endl;
@@ -61,6 +64,11 @@ std::string const& Character::getName() const
 
 void    Character::equip(AMateria* m)
 {
+    if (!m)
+    {
+        std::cout << "Wrong Access" << std::endl;
+        return ;
+    }
     if (m->getType() != "ice" && m->getType() != "cure")
     {
         std::cout << "Wrong AMateria type given" << std::endl;
@@ -98,6 +106,11 @@ void    Character::use(int idx, ICharacter& target)
     if (!(idx < 4 && idx >= 0))
     {
         std::cout << "Wrong idx given" << std::endl;
+        return ;
+    }
+    if (this->slots[idx] == NULL)
+    {
+        std::cout << "Wrong Access" << std::endl;
         return ;
     }
     if (this->slots[idx]->getType() != "ice" && this->slots[idx]->getType() != "cure")

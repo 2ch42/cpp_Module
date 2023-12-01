@@ -2,8 +2,9 @@
 # define AMATERIA_HPP
 
 # include <iostream>
+# include "ICharacter.hpp"
 
-class   ICharacter;
+class ICharacter;
 
 class AMateria
 {
@@ -16,7 +17,7 @@ class AMateria
         AMateria& operator=(const AMateria& amateria);
         virtual ~AMateria();
         std::string const& getType() const;
-        void    AMateria::setType(const std::string& type);
+        void    setType(const std::string& type);
         virtual AMateria* clone() const = 0;
         virtual void use(ICharacter& target);
 };

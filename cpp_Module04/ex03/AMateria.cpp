@@ -48,5 +48,5 @@ AMateria* AMateria::clone() const
 
 void    AMateria::use(ICharacter& target)
 {
-    std::cout << "* Unexpected case of AMateria use" << std::endl;
+    std::cout << "* AMateria class itself name " << target.getName() << " is unexpected" << std::endl;
 }

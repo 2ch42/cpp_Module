@@ -3,21 +3,32 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
 
+/*
 void    check_leak(void)
 {
     system("leaks test");
 }
+*/
 
-int main()
+int main() // test1
 {
-    atexit(check_leak);
+    //atexit(check_leak);
     Dog dog;
     Cat cat;
-    //Animal animal;
     
     dog.makeSound();
     cat.makeSound();
-    //animal.makeSound();
 
     return 0;
 }
+
+/*
+int main() // test2 for pure virtual function
+{
+    atexit(check_leak);
+    Animal animal;
+
+    animal.makeSound();
+    return (0);
+}
+*/

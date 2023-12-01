@@ -36,8 +36,11 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& materiasource)
 
 MateriaSource::~MateriaSource()
 {
-    if (this->m_list)
-        delete[] (this->m_list);
+    for(int i = 0; i < 4; i++)
+    {
+        if (this->m_list[i])
+            delete (this->m_list[i]);
+    }
     std::cout << "MateriaSource destructor called" << std::endl;
 }
 
@@ -58,6 +61,8 @@ AMateria* MateriaSource::createMateria(std::string const& type)
 {
     for(int i = 0; i < 4; i++)
     {
+        if (this->m_list[i] == NULL)
+            break;
         if (this->m_list[i]->getType() == type)
             return (this->m_list[i]->clone());
     }

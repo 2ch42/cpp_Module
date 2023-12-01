@@ -39,6 +39,7 @@ Cure& Cure::operator=(const Cure& cure)
         exit(0);
     }
     std::cout << "Cure copy assignment operator called" << std::endl;
+    return (*this);
 }
 
 Cure::~Cure()

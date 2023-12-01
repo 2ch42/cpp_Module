@@ -3,14 +3,16 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
 
+/*
 void    check_leak(void)
 {
     system("leaks test");
 }
+*/
 
 int main()
 {
-    atexit(check_leak);
+    //atexit(check_leak);
     const Animal* j = new Dog();
     const Animal* i = new Cat();
 

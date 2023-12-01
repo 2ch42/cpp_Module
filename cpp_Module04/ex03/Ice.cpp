@@ -39,6 +39,7 @@ Ice& Ice::operator=(const Ice& ice)
         exit(0);
     }
     std::cout << "Ice copy assignment operator called" << std::endl;
+    return (*this);
 }
 
 Ice::~Ice()

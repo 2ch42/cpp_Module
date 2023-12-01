@@ -7,8 +7,16 @@
 #include "IMateriaSource.hpp"
 #include "MateriaSource.hpp"
 
-int main()
+/*
+void    check_leak(void)
 {
+    system("leaks test");
+}
+*/
+///*
+int main() // test1
+{
+    //atexit(check_leak);
     IMateriaSource* src = new MateriaSource();
     src->learnMateria(new Ice());
     src->learnMateria(new Cure());
@@ -26,3 +34,26 @@ int main()
     delete src;
     return 0;
 }
+//*/
+/*
+int main() // test2
+{
+    atexit(check_leak);
+    IMateriaSource* src = new MateriaSource();
+    src->learnMateria(NULL);
+    src->learnMateria(NULL);
+    ICharacter* me = new Character("me");
+    AMateria* tmp;
+    tmp = src->createMateria("Unknown");
+    me->equip(tmp);
+    tmp = src->createMateria("Practice");
+    me->equip(tmp);
+    ICharacter* bob = new Character("bob");
+    me->use(0, *bob);
+    me->use(1, *bob);
+    delete bob;
+    delete me;
+    delete src;
+    return (0);
+}
+*/
