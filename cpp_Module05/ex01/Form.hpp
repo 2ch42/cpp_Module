@@ -4,6 +4,8 @@
 # include <iostream>
 # include "Bureaucrat.hpp"
 
+class Bureaucrat;
+
 class Form
 {
     private:
@@ -13,13 +15,14 @@ class Form
         const int   e_grade; // execute grade
     public:
         Form();
+        Form(std::string name, const int s_grade, const int e_grade);
         Form(const Form& form);
         Form& operator=(const Form& form);
         ~Form();
         const std::string getName() const;
         bool  get_b_signed() const;
-        const int   get_s_grade() const;
-        const int   get_e_grade() const;
+        int   get_s_grade() const;
+        int   get_e_grade() const;
         class GradeTooHighException : public std::exception
         {
             const char* what() const throw();

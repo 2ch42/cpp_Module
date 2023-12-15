@@ -79,12 +79,12 @@ void    Bureaucrat::grade_down()
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
-    return ("GRADE TOO HIGH EXCEPTION!");
+    return ("BUREAUCRAT GRADE TOO HIGH EXCEPTION!");
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
-    return ("GRADE TOO LOW EXCEPTION!");
+    return ("BUREAUCRAT GRADE TOO LOW EXCEPTION!");
 }
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& bureaucrat)
@@ -95,5 +95,14 @@ std::ostream& operator<<(std::ostream& out, const Bureaucrat& bureaucrat)
 
 void    Bureaucrat::signForm(Form& form) // ex01
 {
-    
+    try
+    {
+        form.beSigned(*this);
+        std::cout << this->name << " signed " << form.getName() << std::endl;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << this->name << " couldn't sign " \
+        << form.getName() << " because " << e.what() << std::endl;
+    }
 }
