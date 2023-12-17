@@ -1,5 +1,24 @@
 #include "Intern.hpp"
 
+Intern::Intern()
+{
+}
+
+Intern::Intern(const Intern& intern)
+{
+    (void) intern;
+}
+
+Intern& Intern::operator=(const Intern& intern)
+{
+    (void) intern;
+    return (*this);
+}
+
+Intern::~Intern()
+{
+}
+
 int check_name(std::string name)
 {
     if (name == "shrubbery creation")
