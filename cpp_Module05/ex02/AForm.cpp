@@ -47,12 +47,17 @@ int AForm::get_e_grade() const
 
 const char* AForm::GradeTooHighException::what() const throw()
 {
-    return ("FORM GRADE TOO HIGH EXCEPTION!");
+    return ("FORM : GRADE TOO HIGH EXCEPTION!");
 }
 
 const char* AForm::GradeTooLowException::what() const throw()
 {
-    return ("FORM GRADE TOO LOW EXCEPTION!");
+    return ("FORM : GRADE TOO LOW EXCEPTION!");
+}
+
+const char* AForm::UnsignedException::what() const throw()
+{
+    return ("FORM : UNSIGNED EXCEPTION!");
 }
 
 void    AForm::beSigned(Bureaucrat& bureaucrat)
