@@ -11,7 +11,7 @@ class ScalarConverter
         ScalarConverter& operator=(const ScalarConverter& sc);
         ~ScalarConverter();
     public:
-        static void convert(char *argv);
+        static void convert(std::string raw);
 };
 
 #endif

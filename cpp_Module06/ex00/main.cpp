@@ -6,7 +6,8 @@ int main(int argc, char *argv[])
     {
         std::cout << "Wrong number of arguments!" << std::endl;
     }
-    ScalarConverter::convert(argv[1]);
+    std::string s(argv[1]);
+    ScalarConverter::convert(s);
     //ScalarConverter A;
     return (0);
 }
