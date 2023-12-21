@@ -10,7 +10,12 @@ Base::~Base() {}
 
 Base *generate(void)
 {
-    srand(time(NULL)); // should use another function
+    static int seed = 0;
+    if (seed == 0)
+    {
+       seed = time(NULL);
+       srand(seed);
+    }
     if (rand() % 3 == 1)
     {
         Base *base = new A();
