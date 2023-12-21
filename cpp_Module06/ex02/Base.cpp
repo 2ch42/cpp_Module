@@ -16,21 +16,19 @@ Base *generate(void)
        seed = time(NULL);
        srand(seed);
     }
-    if (rand() % 3 == 1)
+    Base *base;
+    switch (rand() % 3)
     {
-        Base *base = new A();
-        return base;
+        case 1:
+            base = new A();
+            break ;
+        case 2:
+            base = new B();
+            break;
+        default:
+            base = new C();
     }
-    else if (rand() % 3 == 2)
-    {
-        Base *base = new B();
-        return base;
-    }
-    else
-    {
-        Base *base = new C();
-        return base;
-    }
+    return base;
 }
 
 void    identify(Base *p)
