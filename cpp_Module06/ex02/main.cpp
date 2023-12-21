@@ -10,12 +10,23 @@ int main()
     Base *test2 = generate();
     Base *test3 = generate();
 
+    std::cout << "******POINTER******" << std::endl;
+
     std::cout << "Test1 : ";
     identify(test1);
     std::cout << "Test2 : ";
     identify(test2);
     std::cout << "Test3 : ";
     identify(test3);
+
+    std::cout << "******REFERENCE******" << std::endl;
+
+    std::cout << "Test1 : ";
+    identify(&(*test1));
+    std::cout << "Test2 : ";
+    identify(&(*test2));
+    std::cout << "Test3 : ";
+    identify(&(*test3));
 
     delete test1;
     delete test2;

@@ -41,9 +41,23 @@ void    identify(Base *p)
         std::cout << "Actual type : C" << std::endl;
 }
 
-/*void    identify(Base& p)
+void    identify(Base& p)
 {
-
+    try
+    {
+        p = dynamic_cast<A& >(p);
+        std::cout << "Actual type : A" << std::endl;
+    }
+    catch(const std::exception& e)
+    {
+        try
+        {
+            p = dynamic_cast<B& >(p);
+            std::cout << "Actual type : B" << std::endl;
+        }
+        catch(const std::exception& e)
+        {
+            std::cout << "Actual type : C" << std::endl;
+        }
+    }
 }
-
-*/
