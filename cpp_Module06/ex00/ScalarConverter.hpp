@@ -12,15 +12,24 @@ class ScalarConverter
         ~ScalarConverter();
     public:
         static void convert(std::string raw);
-        class Impossible : public std::exception
-        {
-            const char* what() const throw();
-        };
-        class Nondisplayable : public std::exception
-        {
-            const char* what() const throw();
-        };
 };
+
+typedef struct s_converter
+{
+    int dot;
+    int sign;
+    int f_num;
+    int only_digit;
+    char    char_val;
+    int     int_val;
+    float   float_val;
+    double  double_val;
+    int     char_exc;
+    int     int_exc;
+    float   float_exc;
+    double  double_exc;
+    t_type  type;
+}   t_converter;
 
 typedef enum e_type
 {
@@ -28,8 +37,9 @@ typedef enum e_type
     _int = 2,
     _float = 3,
     _double = 4,
-    _impos = 5,
-    _nondp = 6
+    _special_d = 5,
+    _special_f = 6,
+    _impos = 6,
 }   t_type;
 
 #endif
