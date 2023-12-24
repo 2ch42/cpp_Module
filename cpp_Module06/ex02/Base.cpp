@@ -37,8 +37,10 @@ void    identify(Base *p)
         std::cout << "Actual type : A" << std::endl;
     else if (dynamic_cast<B *>(p))
         std::cout << "Actual type : B" << std::endl;
-    else
+    else if (dynamic_cast<C *>(p))
         std::cout << "Actual type : C" << std::endl;
+    else
+        std::cerr << "Cannot find actual type..." << std::endl;
 }
 
 void    identify(Base& p)
