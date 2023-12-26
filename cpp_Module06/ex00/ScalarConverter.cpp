@@ -123,18 +123,34 @@ void    run_converter(t_converter& converter, std::string& raw)
     }
     if (converter.type == _float)
     {
+        int c_excep = 0;
+        int i_excep = 0;
         converter.c = static_cast<char>(converter.f);
         converter.i = static_cast<int>(converter.f);
         converter.d = static_cast<double>(converter.f);
+        int num;
+        std::stringstream ss;
+        ss.str(raw);
+        ss >> num;
+        if (num == converter.i)
+        {
+            if (converter.c != converter.i)
+                c_excep = 1;
+        }
+        else
+        {
+            i_excep = 1;
+            c_excep = 1;
+        }
         std::cout << "char: ";
-        if (static_cast<float>(converter.c) != converter.f)
+        if (c_excep)
             std::cout << "Impossible";
         else if (!(converter.c >= 33 && converter.c <= 126))
             std::cout << "Non displayable";
         else
             std::cout << converter.c;
         std::cout << "\nint: ";
-        if (static_cast<float>(converter.i) != converter.f)
+        if (i_excep)
             std::cout << "Impossible";
         else
             std::cout << converter.i;
@@ -145,15 +161,31 @@ void    run_converter(t_converter& converter, std::string& raw)
     converter.c = static_cast<char>(converter.d);
     converter.i = static_cast<int>(converter.d);
     converter.f = static_cast<float>(converter.d);
+    int c_excep = 0;
+    int i_excep = 0;
+    int num;
+    std::stringstream ss;
+    ss.str(raw);
+    ss >> num;
+    if (num == converter.i)
+    {
+        if (converter.c != converter.i)
+            c_excep = 1;
+    }
+    else
+    {
+        i_excep = 1;
+        c_excep = 1;
+    }
     std::cout << "char: ";
-    if (static_cast<double>(converter.c) != converter.d)
+    if (c_excep)
         std::cout << "Impossible";
     else if (!(converter.c >= 33 && converter.c <= 126))
         std::cout << "Non displayable";
     else
         std::cout << converter.c;
     std::cout << "\nint: ";
-    if (static_cast<double>(converter.i) != converter.d)
+    if (i_excep)
         std::cout << "Impossible";
     else
         std::cout << converter.i;
