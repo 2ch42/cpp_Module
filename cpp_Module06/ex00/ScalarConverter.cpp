@@ -1,120 +1,170 @@
 #include <string>
+#include <sstream>
 #include "ScalarConverter.hpp"
 
 void    init_converter(t_converter& converter)
 {
-    converter.dot = 0;
-    converter.sign = 0;
-    converter.f_num = 0;
-    converter.only_digit = 1;
-    converter.type = _impos;
-    converter.char_val = 0;
-    converter.int_val = 0;
-    converter.float_val = 0;
-    converter.double_val = 0;
-    converter.char_exc = 0;
-    converter.int_exc = 0;
-    converter.float_exc = 0;
-    converter.double_exc = 0;
+    converter.type = _no_type;
+    converter.impos = 0;
+    converter.non_d = 0;
+    converter.i = 0;
+    converter.c = 0;
+    converter.f = 0;
+    converter.d = 0;
 }
 
-void    get_type(std::string raw, t_converter& converter)
+void    fill_converter(t_converter& converter, std::string& raw)
 {
+    std::stringstream ss;
+
     if (raw == "nan" || raw == "+inf" || raw == "-inf")
     {
-        converter.type = _special_d;
+        converter.type = _double;
+        ss.str(raw);
+        ss >> converter.d;
         return ;
     }
     if (raw == "nanf" || raw == "+inff" || raw == "-inff")
     {
-        converter.type = _special_f;
+        converter.type = _float;
+        raw = raw.substr(0, raw.size() - 1);
+        ss << raw;
+        ss >> converter.f;
         return ;
     }
     if (raw.size() == 1)
     {
-        converter.type = _char;
-        return ;
+        if (!(raw.at(0) >= '0' && raw.at(0) <= '9'))
+        {
+            converter.type = _char;
+            if (!(raw.at(0) >= 33 && raw.at(0) <= 126))
+                converter.non_d = 1;
+            converter.c = raw.at(0);
+            return ;
+        }
     }
-    for (int i = 0; i < raw.size(); i++)
-    {
-        if (raw.at(i) == '.')
-            converter.dot++;
-        else if (raw.size() > 1 && raw.at(0) == '-')
-            converter.sign = 1;
-        else if (raw.at(i) == 'f')
-            converter.f_num++;
-        else if (!std::isdigit(raw.at(i)))
-            converter.only_digit = 0;
-    }
-    if (converter.dot > 1)
-    {
-        converter.type = _impos;
-        return ;
-    }
-    if (converter.only_digit == 0 && converter.dot == 0 && converter.f_num == 0)
+    ss << raw;
+    ss >> converter.i;
+    if (ss.eof())
     {
         converter.type = _int;
+        if (ss.fail())
+            converter.impos = 1;
         return ;
     }
-    if (converter.only_digit == 0 && converter.dot == 1 && converter.f_num == 0)
+    ss.clear();
+    if (raw.at(raw.size() - 1) == 'f')
+    {
+        std::string temp_str = raw.substr(0, raw.size() - 1);
+        ss.str(temp_str);
+        ss >> converter.f;
+        if (ss.eof())
+        {
+            converter.type = _float;
+            if (ss.fail())
+                converter.impos = 1;
+            return ;
+        }
+        converter.type = _no_type;
+        return ;
+    }
+    ss.clear();
+    ss.str(raw);
+    ss >> converter.d;
+    if (ss.eof())
     {
         converter.type = _double;
-        return ;
-    }
-    if (converter.only_digit == 0 && converter.dot == 1 && converter.f_num == 1
-        && raw.at(raw.size() - 1) == 'f')
-    {
-        converter.type = _float;
-        return ;
+        if (ss.fail())
+            converter.impos = 1;
     }
 }
 
-void    ex_convert(std::string raw, t_converter& converter)
+void    run_converter(t_converter& converter, std::string& raw)
 {
-    if (converter.type == _impos)
+    if (converter.type == _no_type || converter.impos == 1)
     {
-        std::cout << "char: impossible\n"
-        << "int: impossible\n"
-        << "float: impossible\n"
-        << "double: impossible\n" << std::endl; 
-    }
-    if (converter.type == _special_d)
-    {
-        std::cout << "char: impossible\n"
-        << "int: impossible\n"
-        << "float: " << raw << "f\n"
-        << "double: " << raw << std::endl;
-    }
-    if (converter.type == _special_f)
-    {
-        std::cout << "char: impossible\n"
-        << "int: impossible\n"
-        << "float: " << raw
-        << "double: " << raw.substr(0, raw.size() - 1) << std::endl;
-    }
-    if (converter.type == _int)
-    {
-        converter.int_val = static_cast<int>(std::strtod(raw.c_str(), NULL));
-        if (converter.int_val != std::strtod(raw.c_str(), NULL))
-            converter.int_exc = 1;
-        converter.char_val = static_cast<char>(converter.int_val);
-        if (converter.char_val != converter.int_val)
-            converter.char_exc = 1;
-        
+        std::cout << "char: Impossible\n"
+            << "int: Impossible\n"
+            << "float: Impossible\n"
+            << "double: Impossible" << std::endl;
+        return ;
     }
     if (converter.type == _char)
     {
-        converter.char_val = raw.at(0);
-        if (!(converter.char_val >= 33 && converter.char_val <= 126))
-            converter.char_exc == 1;
-        converter.int_val = static_cast<int>(converter.char_val);
-        converter.float_val = static_cast<float>(converter.char_val);
-        converter.double_val = static_cast<double>(converter.char_val);
+        converter.i = static_cast<int>(converter.c);
+        converter.f = static_cast<float>(converter.c);
+        converter.d = static_cast<double>(converter.c);
+        std::cout << "char: ";
+        if (converter.non_d == 1)
+            std::cout << "Non displayable";
+        else
+            std::cout << converter.c;
+        std::cout << "\nint: " << converter.i
+        << "\nfloat: " << converter.f
+        << "f \ndouble: " << converter.d << ".0" << std::endl;
+        return ;
     }
-}
-
-void    print_r(std::string raw, t_converter& converter)
-{
+    if (converter.type == _int)
+    {
+        converter.c = static_cast<char>(converter.i);
+        converter.f = static_cast<float>(converter.i);
+        converter.d = static_cast<double>(converter.i);
+        std::cout << "char: ";
+        if (converter.c != converter.i)
+            std::cout << "Impossible";
+        else if (!(converter.c >= 33 && converter.c <= 126))
+            std::cout << "Non displayable";
+        else
+            std::cout << converter.c;
+        std::cout << "\nint: " << converter.i
+        << "\nfloat: " << converter.f
+        << "f \ndouble: " << converter.d << std::endl;
+        return ;
+    }
+    if (converter.type == _float)
+    {
+        converter.c = static_cast<char>(converter.f);
+        converter.i = static_cast<int>(converter.f);
+        converter.d = static_cast<double>(converter.f);
+        std::cout << "char: ";
+        if (static_cast<float>(converter.c) != converter.f)
+            std::cout << "Impossible";
+        else if (!(converter.c >= 33 && converter.c <= 126))
+            std::cout << "Non displayable";
+        else
+            std::cout << converter.c;
+        std::cout << "\nint: ";
+        if (static_cast<float>(converter.i) != converter.f)
+            std::cout << "Impossible";
+        else
+            std::cout << converter.i;
+        std::cout << "\nfloat: " << converter.f
+            << "f \ndouble: " << converter.d << std::endl;
+        return ;
+    }
+    converter.c = static_cast<char>(converter.d);
+    converter.i = static_cast<int>(converter.d);
+    converter.f = static_cast<float>(converter.d);
+    std::cout << "char: ";
+    if (static_cast<double>(converter.c) != converter.d)
+        std::cout << "Impossible";
+    else if (!(converter.c >= 33 && converter.c <= 126))
+        std::cout << "Non displayable";
+    else
+        std::cout << converter.c;
+    std::cout << "\nint: ";
+    if (static_cast<double>(converter.i) != converter.d)
+        std::cout << "Impossible";
+    else
+        std::cout << converter.i;
+    std::cout << "\nfloat: ";
+    if (raw == "nan")
+        std::cout << converter.f << "f";
+    else if (static_cast<double>(converter.f) != converter.d)
+        std::cout << "Impossible";
+    else
+        std::cout << converter.f << "f";
+    std::cout << "\ndouble: " << converter.d << std::endl;
 }
 
 void    ScalarConverter::convert(std::string raw)
@@ -122,8 +172,6 @@ void    ScalarConverter::convert(std::string raw)
     t_converter converter;
 
     init_converter(converter);
-    get_type(raw, converter);
-    ex_convert(raw, converter);
-    if (converter.type != _impos && converter.type != _special_d && converter.type != _special_f)
-        print_r(raw, converter);
+    fill_converter(converter, raw);
+    run_converter(converter, raw);
 }
