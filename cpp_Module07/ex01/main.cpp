@@ -11,6 +11,8 @@ int main()
     }
 
     iter(arr, 10, &call);
+    std::cout << "--------------" << std::endl;
+    iter(arr, 10, &practice);
 
     std::cout << "-----CHAR ARR-----" << std::endl;
     char *str = new char[11];

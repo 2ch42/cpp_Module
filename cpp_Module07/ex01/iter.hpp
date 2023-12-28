@@ -7,6 +7,11 @@ void    call(T& element)
     std::cout << element << std::endl;
 }
 
+void    practice(int& element)
+{
+    std::cout << element << std::endl;
+}
+
 template <typename T>
 void    iter(T *arr, int length, void (*func)(T& ))
 {
