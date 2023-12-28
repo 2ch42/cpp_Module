@@ -22,11 +22,11 @@ int main()
     std::cout << "******REFERENCE******" << std::endl;
 
     std::cout << "Test1 : ";
-    identify(&(*test1));
+    identify((*test1));
     std::cout << "Test2 : ";
-    identify(&(*test2));
+    identify((*test2));
     std::cout << "Test3 : ";
-    identify(&(*test3));
+    identify((*test3));
 
     delete test1;
     delete test2;
