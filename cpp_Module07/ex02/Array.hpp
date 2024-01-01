@@ -24,7 +24,7 @@ class Array
         {
             this->length = array.length;
             this->arr = new T[array.length]();
-            for(int i = 0; i < array.length; i++)
+            for(unsigned int i = 0; i < array.length; i++)
             {
                 this->arr[i] = array.arr[i];
             }
@@ -35,7 +35,7 @@ class Array
             {
                 this->length = array.length;
                 this->arr = new T[array.length]();
-                for(int i = 0; i < array.length; i++)
+                for(unsigned int i = 0; i < array.length; i++)
                 {
                     this->arr[i] = array[i];
                 }
