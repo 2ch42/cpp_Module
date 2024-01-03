@@ -34,6 +34,8 @@ class Array
             if (this != &array)
             {
                 this->length = array.length;
+				if (this->arr)
+					delete[] (this->arr);
                 this->arr = new T[array.length]();
                 for(unsigned int i = 0; i < array.length; i++)
                 {
