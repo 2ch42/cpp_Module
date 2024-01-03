@@ -20,7 +20,7 @@ int main()
     {
         *(str + i) = i + 48;
     }
-    *(str + 11) = '\0';
+    *(str + 10) = '\0';
 
     iter(str, 10, &call);
 
