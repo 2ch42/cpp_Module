@@ -1,3 +1,6 @@
+#include <vector>
+#include <list>
+#include <deque>
 #include "easyfind.hpp"
 
 int main()
@@ -22,7 +25,7 @@ int main()
 
     try
     {
-        std::cout << "-----Testing deque..-----" << std::endl;
+        std::cout << "-----Testing list..-----" << std::endl;
         std::deque<int> int_list;
         int_list.push_back(10);
         int_list.push_back(20);
