@@ -1,4 +1,4 @@
-NAME = test
+NAME = ex01
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 CXX = c++
 SRCS = Span.cpp main.cpp

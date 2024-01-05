@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <stdexcept>
 #include <cstdlib>
+#include <ctime>
 #include "Span.hpp"
 
 Span::Span() : idx(0), size(0) {}
@@ -30,6 +31,17 @@ void    Span::addNumber(int new_val)
         throw(std::runtime_error("Out Of Bounds!"));
     this->dq.push_back(new_val);
     this->idx++;
+}
+
+void    Span::addManyNumber()
+{
+    srand(time(NULL));
+    for(unsigned int i = idx; i < 10000; i++)
+    {
+        if (i >= this->size)
+            throw(std::runtime_error("Out Of Bounds!"));
+        this->dq.push_back(rand() % 10000);
+    }
 }
 
 unsigned int    Span::shortestSpan()
