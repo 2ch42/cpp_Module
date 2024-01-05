@@ -14,7 +14,7 @@ Span& Span::operator=(const Span& span)
 {
     if (this != &span)
     {
-        this->dq = span.dq;
+        this->vec = span.vec;
         this->idx = span.idx;
         this->size = span.size;
     }
@@ -29,7 +29,7 @@ void    Span::addNumber(int new_val)
 {
     if (idx >= size)
         throw(std::runtime_error("Out Of Bounds!"));
-    this->dq.push_back(new_val);
+    this->vec.push_back(new_val);
     this->idx++;
 }
 
@@ -40,7 +40,7 @@ void    Span::addManyNumber()
     {
         if (i >= this->size)
             throw(std::runtime_error("Out Of Bounds!"));
-        this->dq.push_back(rand() % 10000);
+        this->vec.push_back(rand() % 10000);
     }
 }
 
@@ -48,8 +48,8 @@ unsigned int    Span::shortestSpan()
 {
     if (size < 2)
         throw(std::runtime_error("Require Minimum Size Of Container!"));
-    int shortest = std::abs(*(dq.begin() + 1) - *(dq.begin()));
-    for (std::deque<int>::iterator it = this->dq.begin(); it != (dq.end() - 1); it++)
+    int shortest = std::abs(*(vec.begin() + 1) - *(vec.begin()));
+    for (std::vector<int>::iterator it = this->vec.begin(); it != (vec.end() - 1); it++)
     {
         if (std::abs(*(it + 1) - *it) < shortest)
             shortest = std::abs(*(it + 1) - *it);
@@ -61,8 +61,8 @@ unsigned int    Span::longestSpan()
 {
     if (size < 2)
         throw(std::runtime_error("Require Minimum Size Of Container!"));
-    int longest = std::abs(*(dq.begin() + 1) - *(dq.begin()));
-    for (std::deque<int>::iterator it = this->dq.begin(); it != (dq.end() - 1); it++)
+    int longest = std::abs(*(vec.begin() + 1) - *(vec.begin()));
+    for (std::vector<int>::iterator it = this->vec.begin(); it != (vec.end() - 1); it++)
     {
         if (std::abs(*(it + 1) - *it) > longest)
             longest = std::abs(*(it + 1) - *it);

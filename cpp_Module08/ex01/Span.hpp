@@ -1,12 +1,12 @@
 #ifndef SPAN_HPP
 # define SPAN_HPP
 
-# include <deque>
+# include <vector>
 
 class Span
 {
     private:
-        std::deque<int> dq;
+        std::vector<int> vec;
         unsigned int idx;
         unsigned int size;
     public:
