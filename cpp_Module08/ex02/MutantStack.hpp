@@ -23,6 +23,8 @@ class MutantStack : public std::stack<T>
         typedef typename MutantStack<T>::stack::container_type::iterator iterator;
         iterator    begin() { return (this->c.begin()); }
         iterator    end() { return (this->c.end()); }
+        iterator    rbegin() { return (this->c.rbegin()); }
+        iterator    rend() { return (this->c.rend()); }
 
 };
 
