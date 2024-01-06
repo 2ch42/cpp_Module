@@ -25,7 +25,6 @@ class MutantStack : public std::stack<T>
         iterator    end() { return (this->c.end()); }
         iterator    rbegin() { return (this->c.rbegin()); }
         iterator    rend() { return (this->c.rend()); }
-
 };
 
 #endif

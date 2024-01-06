@@ -2,7 +2,6 @@
 #include <algorithm>
 #include <stdexcept>
 #include <cstdlib>
-#include <cmath>
 #include <ctime>
 #include "Span.hpp"
 
@@ -49,11 +48,11 @@ unsigned int    Span::shortestSpan()
     if (size < 2)
         throw(std::runtime_error("Require Minimum Size Of Container!"));
     std::sort(vec.begin(), vec.end());
-    int shortest = std::abs(*(vec.begin() + 1) - *(vec.begin()));
+    int shortest = *(vec.begin() + 1) - *(vec.begin());
     for (std::vector<int>::iterator it = this->vec.begin(); it != (vec.end() - 1); it++)
     {
-        if (std::abs(*(it + 1) - *it) < shortest)
-            shortest = std::abs(*(it + 1) - *it);
+        if ((*(it + 1) - *it) < shortest)
+            shortest = (*(it + 1) - *it);
     }
     return (static_cast<unsigned int>(shortest));
 }
@@ -63,5 +62,5 @@ unsigned int    Span::longestSpan()
     if (size < 2)
         throw(std::runtime_error("Require Minimum Size Of Container!"));
     std::sort(vec.begin(), vec.end());
-    return (std::abs(*(vec.end() - 1) - *(vec.begin())));
+    return (*(vec.end() - 1) - *(vec.begin()));
 }
