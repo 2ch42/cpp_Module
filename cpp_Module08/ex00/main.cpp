@@ -26,13 +26,13 @@ int main()
     try
     {
         std::cout << "-----Testing list..-----" << std::endl;
-        std::deque<int> int_list;
+        std::list<int> int_list;
         int_list.push_back(10);
         int_list.push_back(20);
         int_list.push_back(30);
         int_list.push_back(40);
         int_list.push_back(50);
-        std::deque<int>::iterator it = easyfind(int_list, 20);
+        std::list<int>::iterator it = easyfind(int_list, 20);
         it = easyfind(int_list, 70);
         it = easyfind(int_list, 40);
     }
