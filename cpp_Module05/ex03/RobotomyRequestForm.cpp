@@ -10,7 +10,7 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& rform) : AFo
 
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& rform)
 {
-    std::cout << "Cannot use Copy constructor by " << rform.getName() << std::endl;
+    std::cout << "Cannot use Copy Assignment Operator by " << rform.getName() << std::endl;
     return (*(this));
 }
 

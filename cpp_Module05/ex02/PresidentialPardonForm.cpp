@@ -10,7 +10,7 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& pfo
 
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& pform)
 {
-    std::cout << "Cannot use Copy constructor by " << pform.getName()  << std::endl;
+    std::cout << "Cannot use Copy Assignment Operator by " << pform.getName()  << std::endl;
     return (*(this));
 }
 

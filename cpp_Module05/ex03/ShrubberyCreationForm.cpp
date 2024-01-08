@@ -11,7 +11,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& sform)
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& sform)
 {
-    std::cout << "Cannot use Copy constructor by " << sform.getName() << std::endl;
+    std::cout << "Cannot use Copy Assignment Operator by " << sform.getName() << std::endl;
     return (*(this));
 }
 
