@@ -10,6 +10,7 @@ class BitcoinExchange
     private:
         std::map<std::string, float> _original_m; // original db
         std::map<std::string, float> _new_m; // new db
+        int fail_bit;
     public:
         BitcoinExchange(); // OCF
         BitcoinExchange(const BitcoinExchange& be); // OCF
@@ -17,9 +18,8 @@ class BitcoinExchange
         ~BitcoinExchange(); // OCF
         void    fill_original(std::ifstream& file);
         void    fill_new(std::ifstream& file);
-        static int    error_checker(std::string date, float price);
+        int    error_checker(std::string date, float price);
         void    print_result();
 };
 
 #endif
-
