@@ -134,8 +134,13 @@ void    BitcoinExchange::print_result(char *argv)
             ss >> post_f;
             if (!error_checker(pre_str, post_f))
             {
-                std::map<std::string, float>::iterator itr = this->_original_m.upper_bound(pre_str);
-                std::cout << pre_str << " => " << post_f << " = " << post_f * ((--itr)->second) << std::endl;
+                if (pre_str < this->_original_m.begin()->first)
+                    std::cout << "Error: bad date => " << str.substr(0, 10) << std::endl;
+                else
+                {
+                    std::map<std::string, float>::iterator itr = this->_original_m.upper_bound(pre_str);
+                    std::cout << pre_str << " => " << post_f << " = " << post_f * ((--itr)->second) << std::endl;
+                }
             }
         }
     }
