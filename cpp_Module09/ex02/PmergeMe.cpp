@@ -28,5 +28,5 @@ void    PmergeMe::set_type(int type)
 
 const int   get_type(const int& type) const
 {
-
+    
 }
