@@ -10,6 +10,8 @@ class PmergeMe
         std::list<int> _lst;
         std::vector<int> _vec;
         int _type;
+        //time spent by _lst;
+        //timie spent by _vec;
     public:
         PmergeMe();
         PmergeMe(const PmergeMe& pmm);
@@ -17,8 +19,11 @@ class PmergeMe
         ~PmergeMe();
         void    set_type(int _type);
         const int   get_type(const int& type) const;
-        void    oper_list(char *str);
-        void    oper_vector(char *str);
+        void    oper_list(int argc, char *argv[]);
+        void    oper_vector(int argc, char *argv[]);
+        void    print_list();
+        void    print_vector();
+        void    print_time();
 };
 
 #endif
