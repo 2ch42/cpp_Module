@@ -1,27 +1,27 @@
 #ifndef PMERGEME_HPP
 # define PMERGEME_HPP
 
-# include <list>
+# include <deque>
 # include <vector>
+# include <ctime>
 
 class PmergeMe
 {
     private:
-        std::list<int> _lst;
+        std::deque<int> _deq;
         std::vector<int> _vec;
-        int _type;
-        //time spent by _lst;
-        //timie spent by _vec;
+        clock_t deq_start;
+        clock_t deq_end;
+        clock_t vec_start;
+        clock_t vec_end;
     public:
-        PmergeMe();
-        PmergeMe(const PmergeMe& pmm);
-        PmergeMe& operator=(const PmergeMe& me);
-        ~PmergeMe();
-        void    set_type(int _type);
-        const int   get_type(const int& type) const;
-        void    oper_list(int argc, char *argv[]);
+        PmergeMe(); // OCF
+        PmergeMe(const PmergeMe& pmm); // OCF
+        PmergeMe& operator=(const PmergeMe& me); // OCF
+        ~PmergeMe(); // OCF
+        void    oper_deq(int argc, char *argv[]);
         void    oper_vector(int argc, char *argv[]);
-        void    print_list();
+        void    print_deq();
         void    print_vector();
         void    print_time();
 };
