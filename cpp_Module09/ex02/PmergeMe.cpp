@@ -10,7 +10,7 @@ PmergeMe::PmergeMe() {} // OCF
 PmergeMe::PmergeMe(const PmergeMe& pmm) // OCF
 {
     this->_deq = pmm._deq;
-    this->_deq = pmm._deq;
+    this->_vec = pmm._vec;
 }
 
 PmergeMe&   PmergeMe::operator=(const PmergeMe& pmm) // OCF
@@ -18,7 +18,7 @@ PmergeMe&   PmergeMe::operator=(const PmergeMe& pmm) // OCF
     if (this != &pmm)
     {
         this->_deq = pmm._deq;
-        this->_deq = pmm._deq;
+        this->_vec = pmm._vec;
     }
     return (*this);
 }
