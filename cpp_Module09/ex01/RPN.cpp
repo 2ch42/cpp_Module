@@ -40,7 +40,11 @@ void    RPN::calculate(char *str)
             else if (str[i] == '*')
                 this->_stack.push(num1 * num2);
             else
+            {
+                if (num2 == 0)
+                    throw(std::runtime_error("Error"));
                 this->_stack.push(num1 / num2);
+            }
         }
     }
 }
