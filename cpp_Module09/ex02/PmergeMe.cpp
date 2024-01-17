@@ -1,6 +1,7 @@
 #include "PmergeMe.hpp"
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 #include <stdexcept>
 
 /* OCF */
@@ -27,6 +28,23 @@ PmergeMe::~PmergeMe() {} //OCF
 
 /*   sorting funcs    */
 
+int Jacob(int n)
+{
+    if (n < 0)
+        throw(std::runtime_error("Error"));
+    if (n == 0)
+        return (0);
+    if (n == 1)
+        return (1);
+    else
+        return (Jacob(n - 1) + 2 * Jacob(n - 2));
+}
+
+void    mergeInsert_deq()
+{
+    
+}
+
 void    PmergeMe::oper_deq(int argc, char *argv[])
 {
     this->deq_start = std::clock();
@@ -44,9 +62,55 @@ void    PmergeMe::oper_deq(int argc, char *argv[])
     //[...]
     this->deq_end = std::clock();
 }
-void    sort_vector()
-{
 
+void    merge(std::vector<int>& _big, std::vector<int>& _small, int left, int right)
+{
+    int i = left;
+    int mid = (left + right) / 2;
+    int j = mid + 1;
+    int k = left;
+    std::vector<int> temp1;
+    std::vector<int> temp2;
+
+    while (i <= mid && j <= right)
+    {
+        if (_big[i] <= _big[j])
+        {
+            temp1[k] = _big[i];
+            temp2[k++] = _small[i++];
+        }
+        else
+        {
+            temp1[k] = _big[j];
+            temp2[k++] = _small[j++];
+        }
+    }
+    while (i <= mid)
+    {
+        temp1[k] = _big[i];
+        temp2[k++] = _small[i++];
+    }
+    while (j <= mid)
+    {
+        temp1[k] = _big[j];
+        temp2[k++] = _small[j++];
+    }
+    for(int idx = left; idx <= right; idx++)
+    {
+        _big[idx] = temp1[idx];
+        _small[idx] = temp2[idx];
+    }
+}
+
+void    rec_sort_vec(std::vector<int>& _big, std::vector<int>& _small, int left, int right)
+{
+    if (left < right)
+    {
+        int mid = (left + right) / 2;
+        rec_sort_vec(_big, _small, left, mid);
+        rec_sort_vec(_big, _small, mid + 1, right);
+        merge(_big, _small, left, right);
+    }
 }
 
 void    PmergeMe::oper_vector(int argc, char *argv[])
@@ -63,19 +127,22 @@ void    PmergeMe::oper_vector(int argc, char *argv[])
             throw(std::runtime_error("Error"));
         this->_vec.push_back(n);
     }
-    for(unsigned int i = 0; i < this->_vec.size(); i++)
+    std::vector<int> _big;
+    std::vector<int> _small;
+
+    for(int i = 0; i < this->_vec.size(); i++)
     {
-        if ((i % 2 == 0) && (i + 1 < this->_vec.size()))
-        {
-            if (this->_vec.at(i) < this->_vec.at(i + 1))
-            {
-                int temp = this->_vec.at(i);
-                this->_vec.at(i) = this->_vec.at(i + 1);
-                this->_vec.at(i + 1) = temp;
-            }
-        }
+        if ((i % 2 == 0) && ((i + 1) < this->_vec.size()))
+            _big.push_back(this->_vec.at(i));
+        else
+            _small.push_back(this->_vec.at(i));
     }
-    this->vec_end = std::clock();
+    for(int i = 0; i < this->_vec.size(); i++)
+    {
+        if (_big.at(i) < _small.at(i))
+            std::swap(_big.at(i), _small.at(i));
+    }
+    rec_sort_vec(_big, _small, 0, _big.size() - 1);
 }
 
 /*  print funcs  */
