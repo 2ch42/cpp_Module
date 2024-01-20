@@ -40,9 +40,98 @@ int Jacob(int n)
         return (Jacob(n - 1) + 2 * Jacob(n - 2));
 }
 
-void    mergeInsert_deq()
+void    merge_deq(std::deque<int>& _big, std::deque<int>& _small, int left, int right)
 {
-    
+    int i = left;
+    int mid = (left + right) / 2;
+    int j = mid + 1;
+    int k = left;
+    std::deque<int> temp1(_big.size());
+    std::deque<int> temp2(_small.size());
+
+    while (i <= mid && j <= right)
+    {
+        if (_big[i] <= _big[j])
+        {
+            temp1[k] = _big[i];
+            temp2[k++] = _small[i++];
+        }
+        else
+        {
+            temp1[k] = _big[j];
+            temp2[k++] = _small[j++];
+        }
+    }
+    while (i <= mid)
+    {
+        temp1[k] = _big[i];
+        temp2[k++] = _small[i++];
+    }
+    while (j <= right)
+    {
+        temp1[k] = _big[j];
+        temp2[k++] = _small[j++];
+    }
+    for(int idx = left; idx <= right; idx++)
+    {
+        _big[idx] = temp1[idx];
+        _small[idx] = temp2[idx];
+    }
+}
+
+void    rec_sort_deq(std::deque<int>& _big, std::deque<int>& _small, int left, int right)
+{
+    if (left < right)
+    {
+        int mid = (left + right) / 2;
+        rec_sort_deq(_big, _small, left, mid);
+        rec_sort_deq(_big, _small, mid + 1, right);
+        merge_deq(_big, _small, left, right);
+    }
+}
+
+void    bin_insert_deq(std::deque<int>& _big, int target)
+{
+    int left = 0;
+    int right = _big.size();
+    int mid;
+    while (left <= right)
+    {
+        mid = (left + right) / 2;
+        if (_big.at(mid) == target)
+        {
+            _big.insert(_big.begin() + mid, target);
+            return ;
+        }
+        else if (_big.at(mid) > target)
+            right = mid - 1;
+        else
+            left = mid + 1; 
+    }
+    if (_big.at(mid) < target)
+        _big.insert(_big.begin() + mid + 1, target);
+    else
+        _big.insert(_big.begin() + mid, target);
+}
+
+void    insert_deq(std::deque<int>& _big, std::deque<int>& _small)
+{
+    _big.insert(_big.begin(), _small.at(0));
+    int j_num = 3;
+    if (_small.size() == 1)
+        return ;
+    while ((Jacob(j_num) < static_cast<int>(_small.size())))
+    {
+        for (int i = Jacob(j_num) - 1; i > Jacob(j_num - 1) - 1; i--)
+        {
+            bin_insert_deq(_big, _small.at(i));
+        }
+        j_num++;
+    }
+    for (int i = Jacob(--j_num); i < static_cast<int>(_small.size()); i++)
+    {
+        bin_insert_deq(_big, _small.at(i));
+    }
 }
 
 void    PmergeMe::oper_deq(int argc, char *argv[])
@@ -59,11 +148,31 @@ void    PmergeMe::oper_deq(int argc, char *argv[])
             throw(std::runtime_error("Error"));
         this->_deq.push_back(n);
     }
-    //[...]
-    this->deq_end = std::clock();
+    std::deque<int> _big;
+    std::deque<int> _small;
+
+    for(unsigned int i = 0; i < this->_deq.size(); i++)
+    {
+        if ((i % 2 == 0) && ((i + 1) < this->_deq.size()))
+            _big.push_back(this->_deq.at(i));
+        else
+            _small.push_back(this->_deq.at(i));
+    }
+    for(unsigned int i = 0; i < _big.size(); i++)
+    {
+        if (_big.at(i) < _small.at(i))
+            std::swap(_big.at(i), _small.at(i));
+    }
+    rec_sort_deq(_big, _small, 0, _big.size() - 1);
+    insert_deq(_big, _small);
+    for (unsigned int i = 0; i < _big.size(); i++)
+    {
+        this->_deq.at(i) = _big.at(i);
+    }
+    this->deq_end = clock();
 }
 
-void    merge(std::vector<int>& _big, std::vector<int>& _small, int left, int right)
+void    merge_vec(std::vector<int>& _big, std::vector<int>& _small, int left, int right)
 {
     int i = left;
     int mid = (left + right) / 2;
@@ -109,7 +218,7 @@ void    rec_sort_vec(std::vector<int>& _big, std::vector<int>& _small, int left,
         int mid = (left + right) / 2;
         rec_sort_vec(_big, _small, left, mid);
         rec_sort_vec(_big, _small, mid + 1, right);
-        merge(_big, _small, left, right);
+        merge_vec(_big, _small, left, right);
     }
 }
 
@@ -192,6 +301,7 @@ void    PmergeMe::oper_vector(int argc, char *argv[])
     {
         this->_vec.at(i) = _big.at(i);
     }
+    this->vec_end = std::clock();
 }
 
 /*  print funcs  */
