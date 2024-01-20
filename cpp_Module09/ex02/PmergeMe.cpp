@@ -93,7 +93,7 @@ void    rec_sort_deq(std::deque<int>& _big, std::deque<int>& _small, int left, i
 void    bin_insert_deq(std::deque<int>& _big, int target)
 {
     int left = 0;
-    int right = _big.size();
+    int right = _big.size() - 1;
     int mid;
     while (left <= right)
     {
@@ -225,7 +225,7 @@ void    rec_sort_vec(std::vector<int>& _big, std::vector<int>& _small, int left,
 void    bin_insert_vec(std::vector<int>& _big, int target)
 {
     int left = 0;
-    int right = _big.size();
+    int right = _big.size() - 1;
     int mid;
     while (left <= right)
     {
