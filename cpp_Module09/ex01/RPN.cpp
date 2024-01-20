@@ -26,7 +26,7 @@ void    RPN::calculate(char *str)
         }
         if (is_oper(str[i]))
         {
-            if (this->_stack.size() != 2)
+            if (this->_stack.size() < 2)
                 throw(std::runtime_error("Error"));
             int num1, num2;
             num2 = this->_stack.top();
@@ -51,6 +51,8 @@ void    RPN::calculate(char *str)
 
 int RPN::get_result()
 {
+    if (this->_stack.size() != 1)
+        throw (std::runtime_error("Error"));
     return (this->_stack.top());
 }
 
