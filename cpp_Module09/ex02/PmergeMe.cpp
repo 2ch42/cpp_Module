@@ -188,12 +188,10 @@ void    PmergeMe::oper_vector(int argc, char *argv[])
     }
     rec_sort_vec(_big, _small, 0, _big.size() - 1);
     insert_vec(_big, _small);
-    std::cout << "TEST : ";
     for (unsigned int i = 0; i < _big.size(); i++)
     {
-        std::cout << _big.at(i) << " ";
+        this->_vec.at(i) = _big.at(i);
     }
-    std::cout << std::endl;
 }
 
 /*  print funcs  */
