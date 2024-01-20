@@ -3,6 +3,8 @@
 
 void    check_arg(int argc, char *argv[])
 {
+    if (argc < 2)
+        throw (std::runtime_error("Error"));
     for(int i = 1; i < argc; i++)
     {
         std::string str(argv[i]);

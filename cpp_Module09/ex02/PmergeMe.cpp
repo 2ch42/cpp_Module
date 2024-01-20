@@ -69,8 +69,8 @@ void    merge(std::vector<int>& _big, std::vector<int>& _small, int left, int ri
     int mid = (left + right) / 2;
     int j = mid + 1;
     int k = left;
-    std::vector<int> temp1;
-    std::vector<int> temp2;
+    std::vector<int> temp1(_big.size());
+    std::vector<int> temp2(_small.size());
 
     while (i <= mid && j <= right)
     {
@@ -90,7 +90,7 @@ void    merge(std::vector<int>& _big, std::vector<int>& _small, int left, int ri
         temp1[k] = _big[i];
         temp2[k++] = _small[i++];
     }
-    while (j <= mid)
+    while (j <= right)
     {
         temp1[k] = _big[j];
         temp2[k++] = _small[j++];
@@ -113,6 +113,50 @@ void    rec_sort_vec(std::vector<int>& _big, std::vector<int>& _small, int left,
     }
 }
 
+void    bin_insert_vec(std::vector<int>& _big, int target)
+{
+    int left = 0;
+    int right = _big.size();
+    int mid;
+    while (left <= right)
+    {
+        mid = (left + right) / 2;
+        if (_big.at(mid) == target)
+        {
+            _big.insert(_big.begin() + mid, target);
+            return ;
+        }
+        else if (_big.at(mid) > target)
+            right = mid - 1;
+        else
+            left = mid + 1; 
+    }
+    if (_big.at(mid) < target)
+        _big.insert(_big.begin() + mid + 1, target);
+    else
+        _big.insert(_big.begin() + mid, target);
+}
+
+void    insert_vec(std::vector<int>& _big, std::vector<int>& _small)
+{
+    _big.insert(_big.begin(), _small.at(0));
+    int j_num = 3;
+    if (_small.size() == 1)
+        return ;
+    while ((Jacob(j_num) < static_cast<int>(_small.size())))
+    {
+        for (int i = Jacob(j_num) - 1; i > Jacob(j_num - 1) - 1; i--)
+        {
+            bin_insert_vec(_big, _small.at(i));
+        }
+        j_num++;
+    }
+    for (int i = Jacob(--j_num); i < static_cast<int>(_small.size()); i++)
+    {
+        bin_insert_vec(_big, _small.at(i));
+    }
+}
+
 void    PmergeMe::oper_vector(int argc, char *argv[])
 {
     this->vec_start = std::clock();
@@ -130,19 +174,26 @@ void    PmergeMe::oper_vector(int argc, char *argv[])
     std::vector<int> _big;
     std::vector<int> _small;
 
-    for(int i = 0; i < this->_vec.size(); i++)
+    for(unsigned int i = 0; i < this->_vec.size(); i++)
     {
         if ((i % 2 == 0) && ((i + 1) < this->_vec.size()))
             _big.push_back(this->_vec.at(i));
         else
             _small.push_back(this->_vec.at(i));
     }
-    for(int i = 0; i < this->_vec.size(); i++)
+    for(unsigned int i = 0; i < _big.size(); i++)
     {
         if (_big.at(i) < _small.at(i))
             std::swap(_big.at(i), _small.at(i));
     }
     rec_sort_vec(_big, _small, 0, _big.size() - 1);
+    insert_vec(_big, _small);
+    std::cout << "TEST : ";
+    for (unsigned int i = 0; i < _big.size(); i++)
+    {
+        std::cout << _big.at(i) << " ";
+    }
+    std::cout << std::endl;
 }
 
 /*  print funcs  */
